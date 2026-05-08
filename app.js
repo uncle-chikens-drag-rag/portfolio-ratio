@@ -18,11 +18,19 @@ document.addEventListener('DOMContentLoaded', () => {
         fileNameDisplay.textContent = file.name;
 
         const reader = new FileReader();
-        // 証券会社のCSVは一般的にShift_JIS
-        reader.readAsText(file, "Shift_JIS");
+        // ArrayBuffer + TextDecoder方式でShift-JISを読む（iOS Safari対応）
+        reader.readAsArrayBuffer(file);
         reader.onload = function(event) {
-            const csvData = event.target.result;
-            processData(csvData);
+            try {
+                const decoder = new TextDecoder('shift-jis');
+                const csvData = decoder.decode(event.target.result);
+                processData(csvData);
+            } catch (err) {
+                // フォールバック: UTF-8として試みる
+                const decoder = new TextDecoder('utf-8');
+                const csvData = decoder.decode(event.target.result);
+                processData(csvData);
+            }
         };
     });
 
