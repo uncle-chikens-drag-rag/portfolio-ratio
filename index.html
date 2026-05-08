@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ポートフォリオ リバランス (成長投資枠)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>ポートフォリオ リバランス</h1>
+    </header>
+
+    <div class="upload-section">
+      <label class="file-label" for="csvUpload">
+        <span class="btn-primary">CSVアップロード</span>
+        <input type="file" id="csvUpload" accept=".csv" />
+      </label>
+      <span id="fileName" class="file-name">ファイル未選択</span>
+    </div>
+
+    <div id="appBody" class="hidden fade-in">
+      <div class="summary-cards">
+        <div class="card summary-card">
+          <h3>現在の評価額合計</h3>
+          <p id="currentTotalVal" class="price">¥0</p>
+        </div>
+        <div class="card summary-card">
+          <h3>目標比率合計</h3>
+          <p id="targetPercentSum" class="percent">0%</p>
+        </div>
+      </div>
+
+      <section class="card table-section">
+        <div class="table-header">
+          <h2>対象ファンド一覧</h2>
+          <button id="resetTargetBtn" class="btn-secondary">現在の割合にリセット</button>
+        </div>
+        <div class="table-responsive">
+          <table id="fundsTable">
+            <thead>
+              <tr>
+                <th>ファンド名</th>
+                <th class="text-right">現在の評価額</th>
+                <th class="text-right">現在の割合</th>
+                <th class="text-center">目標割合 (%)</th>
+                <th class="text-right">目標評価額</th>
+                <th class="text-right">リバランス額</th>
+              </tr>
+            </thead>
+            <tbody id="fundsTableBody">
+              <!-- 動的生成 -->
+            </tbody>
+          </table>
+        </div>
+        <div id="alertMessage" class="alert hidden">目標割合の合計が100%になっていません。調整してください。</div>
+      </section>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
