@@ -249,6 +249,11 @@ input[type="number"]:focus {
   animation: fadeIn 0.3s ease-in;
 }
 
+/* PCではカードを隠し、テーブルを表示（デフォルト） */
+.fund-cards-mobile {
+  display: none;
+}
+
 /* ============================================
    モバイル用カードレイアウト
    ============================================ */
@@ -340,9 +345,4 @@ input[type="number"]:focus {
   h1 {
     font-size: 1.5rem;
   }
-}
-
-/* PCではカードを隠し、テーブルを表示（デフォルト） */
-.fund-cards-mobile {
-  display: none;
 }
