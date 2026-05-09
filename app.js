@@ -8,9 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const targetPercentSumDisplay = document.getElementById('targetPercentSum');
     const alertMessage = document.getElementById('alertMessage');
     const resetTargetBtn = document.getElementById('resetTargetBtn');
+    const autoDistributeBtn = document.getElementById('autoDistributeBtn');
+    const additionalAmountInput = document.getElementById('additionalAmount');
 
     let fundsData = [];
     let currentTotal = 0;
+    let additionalAmount = 0;
 
     csvUpload.addEventListener('change', (e) => {
         const file = e.target.files[0];
@@ -138,7 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
         fundCardsMobile.innerHTML = '';
         
         fundsData.forEach((fund, index) => {
-            const targetAmount = Math.round(currentTotal * (fund.targetPct / 100));
+            const newTotal = currentTotal + additionalAmount;
+            const targetAmount = Math.round(newTotal * (fund.targetPct / 100));
             const diff = targetAmount - fund.val;
             const diffFormatted = formatDiff(diff);
 
@@ -186,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // イベントリスナー（テーブル・カード両方のinputに対して）
-        document.querySelectorAll('input[type="number"]').forEach(input => {
+        document.querySelectorAll('#fundsTableBody input, #fundCardsMobile input').forEach(input => {
             input.addEventListener('input', (e) => {
                 const idx = parseInt(e.target.dataset.index, 10);
                 const val = parseFloat(e.target.value);
@@ -207,15 +211,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function formatDiff(diff) {
         if (diff > 0) return `<span class="amount-plus">+¥${diff.toLocaleString()}</span>`;
-        if (diff < 0) return `<span class="amount-minus">-¥${Math.abs(diff).toLocaleString()}</span>`;
+        if (diff < 0) return `<span class="amount-minus">−¥${Math.abs(diff).toLocaleString()}</span>`;
         return `±¥0`;
     }
 
     function updateSumsAndDiffs() {
+        const newTotal = currentTotal + additionalAmount;
         let sum = 0;
         fundsData.forEach((fund, index) => {
             sum += fund.targetPct;
-            const targetAmount = Math.round(currentTotal * (fund.targetPct / 100));
+            const targetAmount = Math.round(newTotal * (fund.targetPct / 100));
             const diff = targetAmount - fund.val;
             const diffFormatted = formatDiff(diff);
 
@@ -234,14 +239,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         targetPercentSumDisplay.textContent = `${sum.toFixed(1)}%`;
-        
-        if (Math.abs(sum - 100) > 0.01) {
-            targetPercentSumDisplay.style.color = 'var(--danger)';
-            alertMessage.classList.remove('hidden');
-        } else {
-            targetPercentSumDisplay.style.color = 'var(--primary)';
-            alertMessage.classList.add('hidden');
-        }
+        const isValid = Math.abs(sum - 100) <= 0.01;
+        targetPercentSumDisplay.style.color = isValid ? 'var(--primary)' : 'var(--danger)';
+        alertMessage.classList.toggle('hidden', isValid);
     }
 
     resetTargetBtn.addEventListener('click', () => {
@@ -250,5 +250,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         adjustTargetSum();
         renderTable();
+    });
+
+    autoDistributeBtn.addEventListener('click', () => {
+        if (fundsData.length === 0) return;
+
+        const SATELLITE_PCT = 10;
+        const satelliteCount = fundsData.length - 1; // コア以外すべて
+        const corePct = 100 - satelliteCount * SATELLITE_PCT;
+
+        if (corePct <= 0) {
+            alert('ファンド数が多すぎるため、コアに割り当てる比率がなくなります。');
+            return;
+        }
+
+        // 評価額最大のファンドをコアに認定
+        const coreIndex = fundsData.reduce(
+            (maxIdx, f, i, arr) => f.val > arr[maxIdx].val ? i : maxIdx,
+            0
+        );
+
+        fundsData.forEach((f, i) => {
+            f.targetPct = i === coreIndex ? corePct : SATELLITE_PCT;
+        });
+
+        renderTable();
+    });
+
+    additionalAmountInput.addEventListener('input', () => {
+        const val = parseInt(additionalAmountInput.value, 10);
+        additionalAmount = isNaN(val) || val < 0 ? 0 : val;
+        updateSumsAndDiffs();
     });
 });

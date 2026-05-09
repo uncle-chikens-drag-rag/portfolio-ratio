@@ -27,16 +27,23 @@
           <h3>現在の評価額合計</h3>
           <p id="currentTotalVal" class="price">¥0</p>
         </div>
-        <div class="card summary-card">
-          <h3>目標比率合計</h3>
-          <p id="targetPercentSum" class="percent">0%</p>
+        <div class="card summary-card input-card">
+          <h3>追加投資額</h3>
+          <div class="amount-input-wrap">
+            <span class="yen-prefix">¥</span>
+            <input type="number" id="additionalAmount" min="0" step="10000" placeholder="0" />
+          </div>
         </div>
       </div>
 
       <section class="card table-section">
         <div class="table-header">
           <h2>対象ファンド一覧</h2>
-          <button id="resetTargetBtn" class="btn-secondary">現在の割合にリセット</button>
+          <div class="table-header-right">
+            <span class="pct-sum-label">目標合計: <span id="targetPercentSum">0%</span></span>
+            <button id="autoDistributeBtn" class="btn-secondary">自動配分</button>
+            <button id="resetTargetBtn" class="btn-secondary">リセット</button>
+          </div>
         </div>
         <div class="table-responsive">
           <table id="fundsTable">
