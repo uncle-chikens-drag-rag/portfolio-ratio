@@ -1,162 +1,180 @@
 :root {
-  --bg-color: #f4f7fb;
+  --bg-color: #eef2f8;
   --card-bg: #ffffff;
-  --text-main: #334155;
-  --text-muted: #64748b;
-  --primary: #4f46e5;
-  --primary-hover: #4338ca;
-  --success: #10b981;
-  --danger: #ef4444;
-  --border: #e2e8f0;
-  --border-radius: 12px;
-  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --text-main: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --primary: #1d4ed8;
+  --primary-hover: #1e40af;
+  --success: #059669;
+  --danger: #e11d48;
+  --border: #dce6f0;
+  --border-strong: #b8cce0;
+  --border-radius: 10px;
+  --shadow: 0 1px 4px 0 rgb(15 23 42 / 0.08), 0 0 0 1px rgb(15 23 42 / 0.04);
+  --shadow-md: 0 4px 12px 0 rgb(15 23 42 / 0.1), 0 0 0 1px rgb(15 23 42 / 0.04);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body { 
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-  background-color: var(--bg-color); 
-  color: var(--text-main); 
-  line-height: 1.6; 
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.container { 
-  max-width: 1000px; 
-  margin: 0 auto; 
-  padding: 2rem; 
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
 }
 
 @media (max-width: 640px) {
-  .container {
-    padding: 1rem;
-  }
+  .container { padding: 1.25rem 1rem; }
 }
 
-header { 
-  margin-bottom: 1rem; 
-  text-align: center; 
+/* Header — ダークネイビーのアクセントライン付き */
+header {
+  margin-bottom: 2rem;
+  text-align: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
 }
 
-.card { 
-  background: var(--card-bg); 
-  border-radius: var(--border-radius); 
-  padding: 1.5rem; 
-  box-shadow: var(--shadow); 
-  margin-bottom: 1.5rem; 
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+h1 {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.04em;
 }
 
-.card:hover {
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+/* Card */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.375rem 1.5rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  margin-bottom: 1rem;
 }
 
-.hidden { 
-  display: none !important; 
-}
+.hidden { display: none !important; }
 
-.fade-in {
-  animation: fadeIn 0.5s ease-in;
-}
+.fade-in { animation: fadeIn 0.3s ease-out; }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* Upload Section */
-.upload-section { 
-  display: flex; 
-  flex-direction: row; 
-  align-items: center; 
-  gap: 1rem;
-  margin-bottom: 1.5rem; 
+.upload-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 1.375rem;
 }
 
-.file-label { 
-  cursor: pointer; 
-  display: inline-block; 
+.file-label {
+  cursor: pointer;
+  display: inline-block;
 }
 
-.file-label input[type="file"] { 
-  display: none; 
-}
+.file-label input[type="file"] { display: none; }
 
-.btn-primary { 
-  background-color: var(--primary); 
-  color: white; 
-  padding: 0.75rem 1.5rem; 
-  border-radius: 8px; 
-  font-weight: 600; 
-  cursor: pointer; 
-  transition: background-color 0.2s, transform 0.1s; 
-  display: inline-block; 
+.btn-primary {
+  background-color: var(--primary);
+  color: #ffffff;
+  padding: 0.5rem 1.125rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.15s, box-shadow 0.15s;
+  display: inline-block;
   border: none;
-  font-size: 1rem;
+  letter-spacing: -0.01em;
+  font-family: inherit;
+  box-shadow: 0 1px 3px rgb(29 78 216 / 0.35);
 }
 
-.btn-primary:hover { 
-  background-color: var(--primary-hover); 
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  box-shadow: 0 2px 6px rgb(29 78 216 / 0.4);
 }
 
-.btn-primary:active {
-  transform: scale(0.98);
+.btn-primary:active { opacity: 0.85; }
+
+.btn-secondary {
+  background-color: var(--card-bg);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-strong);
+  padding: 0.375rem 0.875rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  letter-spacing: -0.01em;
+  font-family: inherit;
 }
 
-.btn-secondary { 
-  background-color: white; 
-  color: var(--primary); 
-  border: 1px solid var(--primary); 
-  padding: 0.5rem 1rem; 
-  border-radius: 6px; 
-  font-weight: 600; 
-  cursor: pointer; 
-  transition: all 0.2s; 
+.btn-secondary:hover {
+  background-color: #f1f5fb;
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
-.btn-secondary:hover { 
-  background-color: #f8fafc; 
-}
+.btn-secondary:active { opacity: 0.75; }
 
-.btn-secondary:active {
-  transform: scale(0.98);
-}
-
-.file-name { 
-  color: var(--text-muted); 
-  font-size: 0.95rem; 
+.file-name {
+  color: var(--text-muted);
+  font-size: 0.875rem;
 }
 
 /* Summary Cards */
-.summary-cards { 
-  display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-  gap: 1.5rem; 
-  margin-bottom: 1.5rem; 
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-.summary-card { 
-  text-align: center; 
+.summary-card {
+  text-align: left;
+  /* 左端にブルーのアクセントライン */
+  border-left: 3px solid var(--primary);
+  padding-left: calc(1.5rem - 3px);
 }
 
-.summary-card h3 { 
-  font-size: 1rem; 
-  color: var(--text-muted); 
-  margin-bottom: 0.5rem; 
-  font-weight: 500; 
+.summary-card h3 {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
 }
 
-.summary-card .price { 
-  font-size: 2rem; 
-  font-weight: 700; 
-  color: var(--text-main); 
+.summary-card .price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
 }
 
-.summary-card .percent { 
-  font-size: 2rem; 
-  font-weight: 700; 
-  color: var(--primary); 
-  transition: color 0.3s ease;
+.summary-card .percent {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.2s ease;
 }
 
 /* 追加投資額入力カード */
@@ -164,60 +182,71 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-left: 3px solid #0ea5e9;
+  padding-left: calc(1.5rem - 3px);
 }
 
 .amount-input-wrap {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  align-items: baseline;
+  gap: 0.375rem;
   margin-top: 0.5rem;
 }
 
 .yen-prefix {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-muted);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
 }
 
 .input-card input[type="number"] {
   flex: 1;
   width: 100%;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 1.5rem;
+  padding: 0.25rem 0;
+  border: none;
+  border-bottom: 2px solid var(--border-strong);
+  border-radius: 0;
+  font-size: 1.625rem;
   font-weight: 700;
   color: var(--text-main);
   text-align: right;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  background: transparent;
+  transition: border-color 0.15s;
+  letter-spacing: -0.04em;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
 }
 
 .input-card input[type="number"]:focus {
   outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+  border-bottom-color: var(--primary);
 }
 
 /* Table Section */
-.table-header { 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  margin-bottom: 1rem; 
+.table-section { padding: 1.5rem; }
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
 }
 
-.table-header h2 { 
-  font-size: 1.25rem; 
+.table-header h2 {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
 }
 
 .table-header-right {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.625rem;
 }
 
 .pct-sum-label {
-  font-size: 0.85rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
   font-weight: 500;
 }
@@ -225,152 +254,164 @@ header {
 .pct-sum-label span {
   font-weight: 700;
   color: var(--primary);
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
+  font-variant-numeric: tabular-nums;
 }
 
-.table-responsive { 
-  overflow-x: auto; 
+.table-responsive { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-table { 
-  width: 100%; 
-  border-collapse: collapse; 
-}
-
-th, td { 
-  padding: 1rem; 
-  text-align: left; 
-  border-bottom: 1px solid var(--border); 
+th, td {
+  padding: 0.8125rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
   white-space: nowrap;
 }
 
-td:first-child { 
+td:first-child {
   white-space: normal;
-  max-width: 250px;
-  line-height: 1.4;
+  max-width: 240px;
+  line-height: 1.45;
 }
 
-th { 
-  font-weight: 600; 
-  color: var(--text-muted); 
-  background-color: #f8fafc; 
-  font-size: 0.9rem; 
+th {
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: #f6f9fd;
+  border-bottom: 1px solid var(--border-strong);
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
 }
 
-td { 
-  font-size: 0.95rem; 
+td {
+  font-size: 0.9375rem;
+  color: var(--text-main);
+  font-variant-numeric: tabular-nums;
 }
 
-tr:hover td {
-  background-color: #f1f5f9;
-}
+tr:last-child td { border-bottom: none; }
+
+tr:hover td { background-color: #f6f9fd; }
 
 .text-right { text-align: right; }
 .text-center { text-align: center; }
 
-.amount-plus { 
-  color: var(--success); 
-  font-weight: 600; 
+.amount-plus {
+  color: var(--success);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
-.amount-minus { 
-  color: var(--danger); 
-  font-weight: 600; 
+.amount-minus {
+  color: var(--danger);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
-input[type="number"] { 
-  width: 80px; 
-  padding: 0.5rem; 
-  border: 1px solid var(--border); 
-  border-radius: 6px; 
-  text-align: right; 
-  font-size: 1rem; 
-  transition: border-color 0.2s, box-shadow 0.2s;
+input[type="number"] {
+  width: 72px;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 5px;
+  text-align: right;
+  font-size: 0.875rem;
+  color: var(--text-main);
+  background: #f6f9fd;
+  transition: border-color 0.15s, background 0.15s;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
 }
 
-input[type="number"]:focus { 
-  outline: none; 
-  border-color: var(--primary); 
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2); 
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--card-bg);
+  box-shadow: 0 0 0 3px rgb(29 78 216 / 0.1);
 }
 
-.alert { 
-  margin-top: 1rem; 
-  padding: 1rem; 
-  background-color: #fef2f2; 
-  color: #b91c1c; 
-  border-radius: 8px; 
-  border: 1px solid #fecaca; 
-  text-align: center; 
-  font-weight: 500; 
-  animation: fadeIn 0.3s ease-in;
+.alert {
+  margin-top: 1rem;
+  padding: 0.625rem 1rem;
+  background-color: #fff5f7;
+  color: #be123c;
+  border-radius: 6px;
+  border: 1px solid #fecdd3;
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  animation: fadeIn 0.2s ease-out;
 }
 
 /* PCではカードを隠し、テーブルを表示（デフォルト） */
-.fund-cards-mobile {
-  display: none;
-}
+.fund-cards-mobile { display: none; }
 
 /* ============================================
    モバイル用カードレイアウト
    ============================================ */
-
-/* スマホではテーブルを隠し、カードを表示 */
 @media (max-width: 640px) {
-  .table-responsive {
-    display: none;
-  }
+  .table-responsive { display: none; }
+
   .fund-cards-mobile {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem;
   }
 
   .fund-card-mobile {
-    background: var(--bg-color);
+    background: var(--card-bg);
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem 1rem;
+    gap: 0.625rem 1rem;
     align-items: center;
+    border-left: 3px solid var(--primary);
   }
 
   .fund-card-mobile .fund-name {
     grid-column: 1 / -1;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     color: var(--text-main);
-    line-height: 1.4;
-    padding-bottom: 0.5rem;
+    line-height: 1.45;
+    padding-bottom: 0.625rem;
     border-bottom: 1px solid var(--border);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.125rem;
+    letter-spacing: -0.01em;
   }
 
   .fund-card-mobile .fc-item {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.2rem;
   }
 
   .fund-card-mobile .fc-label {
-    font-size: 0.7rem;
+    font-size: 0.6875rem;
     color: var(--text-muted);
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.06em;
   }
 
   .fund-card-mobile .fc-value {
-    font-size: 0.95rem;
+    font-size: 0.9375rem;
     font-weight: 600;
     color: var(--text-main);
+    font-variant-numeric: tabular-nums;
   }
 
   .fund-card-mobile .fc-item.target-input input[type="number"] {
     width: 100%;
-    font-size: 1rem;
+    font-size: 0.9375rem;
   }
 
   .fund-card-mobile .fc-item.rebalance {
@@ -378,13 +419,13 @@ input[type="number"]:focus {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-top: 0.5rem;
+    padding-top: 0.625rem;
     border-top: 1px solid var(--border);
-    margin-top: 0.25rem;
+    margin-top: 0.125rem;
   }
 
   .fund-card-mobile .fc-item.rebalance .fc-value {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .table-header {
@@ -395,10 +436,8 @@ input[type="number"]:focus {
 
   .summary-card .price,
   .summary-card .percent {
-    font-size: 1.5rem;
+    font-size: 1.375rem;
   }
 
-  h1 {
-    font-size: 1.5rem;
-  }
+  h1 { font-size: 1.25rem; }
 }
